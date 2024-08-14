@@ -151,3 +151,22 @@ export const logOut = (req, res) => {
         success: true
     })
 }
+
+export const deleteUser = async (req, res) => {
+    try {
+        const user = await User.findOneAndDelete({ "personal_info.email": "ankitbharatwaaj@gmail.com" })
+        if (!user) {
+            return res.status(400).json({
+                message: "User not found",
+                success: false
+            })
+        }
+        res.status(200).json({
+            message: "User deleted successfully",
+            success: true,
+            user
+        })
+    } catch (error) {
+
+    }
+}
